@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Do You Hate me??</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(135deg, #ffd1dc, #ff9eb5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial;
+  overflow: hidden;
+}
+
+.box {
+  text-align: center;
+}
+
+/* CHỮ LỚN GIỮA */
+h1 {
+  color: #ff3f6c;
+  font-size: 45px;
+  text-align: center;
+}
+
+img {
+  width: 200px;
+  margin: 20px 0;
+}
+
+button {
+  padding: 12px 25px;
+  font-size: 18px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  margin: 10px;
+}
+
+#yes {
+  background: #ff4d6d;
+  color: white;
+}
+
+#no {
+  background: white;
+  color: #ff4d6d;
+  position: absolute;
+}
+
+#result {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, #ff9eb5, #ff4d6d);
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* CHỮ KẾT QUẢ XỊN */
+.result-text {
+  color: yellow;
+  font-size: 30px;
+  text-shadow: 0 0 10px white, 0 0 20px pink;
+  animation: zoom 1s infinite alternate;
+}
+
+@keyframes zoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.2); }
+}
+
+/* chữ WAOOO bay */
+.waoo {
+  position: absolute;
+  font-size: 30px;
+  color: white;
+  animation: fly 5s linear infinite;
+}
+
+@keyframes fly {
+  0% {transform: translate(0,0);}
+  25% {transform: translate(200px,-150px);}
+  50% {transform: translate(-200px,100px);}
+  75% {transform: translate(150px,200px);}
+  100% {transform: translate(0,0);}
+}
+
+/* pháo hoa */
+.firework {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: yellow;
+  border-radius: 50%;
+  animation: explode 1s ease-out forwards;
+}
+
+@keyframes explode {
+  from {transform: scale(1); opacity: 1;}
+  to {transform: scale(20); opacity: 0;}
+}
+</style>
+
+</head>
+<body>
+
+<div class="box">
+
+  <h1>Do You Hate me??</h1>
+
+  <img src="https://media.tenor.com/6Z0J9bH0d0AAAAAi/cute-bear.gif">
+
+  <div id="question">
+    <button id="yes">no 🐧</button>
+    <button id="no">yes 😭</button>
+  </div>
+
+</div>
+
+<div id="result">
+  <img src="https://media.tenor.com/7xgZz2kW4l8AAAAi/cute-bear-love.gif">
+  <h2 class="result-text">ầyyy bảnh z trời 🤭🔥</h2>
+</div>
+
+<audio id="music" autoplay loop>
+  <source src="music.mp3" type="audio/mp3">
+</audio>
+
+<script>
+const yes = document.getElementById("yes");
+const no = document.getElementById("no");
+const result = document.getElementById("result");
+const question = document.getElementById("question");
+
+// bấm YES
+yes.onclick = () => {
+  question.style.display = "none";
+  result.style.display = "flex";
+
+  startFireworks();
+  spawnWaooo();
+};
+
+// nút NO chạy trốn
+no.addEventListener("mouseover", () => {
+  const x = Math.random() * (window.innerWidth - 100);
+  const y = Math.random() * (window.innerHeight - 50);
+  no.style.left = x + "px";
+  no.style.top = y + "px";
+});
+
+// pháo hoa
+function startFireworks() {
+  setInterval(() => {
+    const fw = document.createElement("div");
+    fw.className = "firework";
+    fw.style.left = Math.random() * window.innerWidth + "px";
+    fw.style.top = Math.random() * window.innerHeight + "px";
+    result.appendChild(fw);
+
+    setTimeout(() => fw.remove(), 1000);
+  }, 300);
+}
+
+// chữ WAOOO bay
+function spawnWaooo() {
+  setInterval(() => {
+    const text = document.createElement("div");
+    text.className = "waoo";
+    text.innerText = "WAOOO 🤭";
+    text.style.left = Math.random() * window.innerWidth + "px";
+    text.style.top = Math.random() * window.innerHeight + "px";
+    result.appendChild(text);
+
+    setTimeout(() => text.remove(), 5000);
+  }, 500);
+}
+</script>
+
+</body>
+</html>
